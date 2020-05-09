@@ -105,6 +105,7 @@ while True:
 	cv2.imshow("Frame", frame)
 	cv2.imshow("mask", mask)
 	key = cv2.waitKey(0) & 0xFF
+	print(frame_no)
 
 	# if the 's' key is selected, we are going to "select" a bounding
 	# box to track
