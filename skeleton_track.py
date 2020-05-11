@@ -18,11 +18,11 @@ OPENCV_OBJECT_TRACKERS = {
 trackers = cv2.MultiTracker_create()
 algo = 'csrt'
 cv2.namedWindow('mask',cv2.WINDOW_NORMAL)
-# cv2.namedWindow('Frame',cv2.WINDOW_NORMAL)
+cv2.namedWindow('Frame',cv2.WINDOW_NORMAL)
 
 # otherwise, grab a reference to the video file
 
-vs = cv2.VideoCapture('/home/rohit/projects/gamitrack/videos/tumble_crop.mp4')
+vs = cv2.VideoCapture('videos/tumble_crop.mp4')
 _,frame = vs.read()
 mask = np.zeros_like(frame)
 mask_clear = np.zeros_like(frame)
@@ -31,7 +31,8 @@ mask_clear = 255-mask_clear
 p1 , p2, p3 = [], [], []
 c=0
 frame_no = 0
-col_r = 25
+col_r = 10
+draw_after = 5 
 
 while True:
 	frame_no+=1
@@ -66,7 +67,7 @@ while True:
 			elif i == 2:
 				p3.append(coordinate)
 		
-		if c>2 and frame_no%20 == 0:
+		if c>2 and frame_no%draw_after == 0:
 			
 			col_r+= 5
 			p1_c = np.array(p1)
@@ -87,12 +88,9 @@ while True:
 				y_fit = fit[0] * t**2  + fit[1] * t +  fit[2]
 
 				for x,y in zip(t,y_fit):
-
 					cv2.circle(frame,(int(x),int(y)), 3, (0,255,255),thickness=3)
 					cv2.circle(mask,(int(x),int(y)), 3, (255,0,col_r),thickness=1)
 					cv2.circle(mask_clear,(int(x),int(y)), 3, (0,0,0),thickness=1)
-
-
 
 	for box in boxes:
 		(x, y, w, h) = [int(v) for v in box]
@@ -101,7 +99,6 @@ while True:
 	frame = cv2.bitwise_and(frame,mask_clear)
 	frame = cv2.bitwise_or(mask,frame)
 			
-	# show the output frame
 	cv2.imshow("Frame", frame)
 	cv2.imshow("mask", mask)
 	key = cv2.waitKey(0) & 0xFF

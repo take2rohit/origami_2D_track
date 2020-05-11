@@ -1,3 +1,7 @@
 /.vscode/
-/videos/
 *.npy
+feature_track.py
+# Videos 
+/videos/*
+!*/pull_slinky.MOV
+!*/tumble_crop.mp4

@@ -13,7 +13,7 @@ for i in range(0, len(pts), 3):
 	p2.append(pts[i+1])
 	p3.append(pts[i+2])
 
-cap = cv2.VideoCapture('/home/rohit/projects/gamitrack/videos/tumble_crop.mp4')
+cap = cv2.VideoCapture('videos/tumble_crop.mp4')
 cv2.namedWindow('image',cv2.WINDOW_NORMAL)
 
 

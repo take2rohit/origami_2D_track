@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-cap = cv2.VideoCapture('/home/rohit/Downloads/IMG_5044.MOV')
+cap = cv2.VideoCapture('videos/pull_slinky.MOV')
 cv2.namedWindow('Frame',cv2.WINDOW_NORMAL)
 
 
@@ -87,7 +87,6 @@ def boxes_to_track(frame, no_of_features=10, bbox_size=20):
 if __name__ == '__main__':
 
 	ret,frame = cap.read()
-	frame = frame[100:700,900:1800,:]
 	boxes_calc = boxes_to_track(frame,no_of_features=50)
 	frame_no = 0 
 	while True:
@@ -98,7 +97,7 @@ if __name__ == '__main__':
 			box = boxes_calc[frame_no]
 			(x, y, w, h) = [int(v) for v in box]
 			cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-			cv2.circle(frame,(x+w/2,y+w/2), 3,(255,0,0),thickness=3)
+			cv2.circle(frame,(x+w//2,y+w//2), 3,(255,0,0),thickness=3)
 		
 			tracker = OPENCV_OBJECT_TRACKERS[tracker_name]()
 			trackers.add(tracker, frame, box)
@@ -106,8 +105,7 @@ if __name__ == '__main__':
 			key = cv2.waitKey(1) & 0xFF
 		
 		else:
-			ret,frame = cap.read()
-			frame = frame[100:700,900:1800,:]
+			ret,frame = cap.read()	
 			(success, boxes) = trackers.update(frame)
 			for box in boxes:
 				(x, y, w, h) = [int(v) for v in box]

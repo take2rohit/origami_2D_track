@@ -49,8 +49,8 @@ def findCircle(x1, y1, x2, y2, x3, y3) :
 	return (h,k), r 
 
 
-pts_origami = np.load('origami_custom_track.npy')
-pts_magnet = np.load('magnet_custom_track.npy')
+pts_origami = np.load('saved_files/origami_custom_track.npy')
+pts_magnet = np.load('saved_files/magnet_custom_track.npy')
 
 p1_origami = []
 p2_origami = []
@@ -68,7 +68,7 @@ for i in range(0, len(pts_magnet), 2):
 	p1_magnet.append(pts_magnet[i])    
 	p2_magnet.append(pts_magnet[i+1])
 
-cap = cv2.VideoCapture('/home/rohit/projects/gamitrack/videos/tumble_crop.mp4')
+cap = cv2.VideoCapture('videos/tumble_crop.mp4')
 cv2.namedWindow('image',cv2.WINDOW_NORMAL)
 
 frame_no = 0
@@ -108,7 +108,7 @@ while 1:
 			cv2.imshow("image", traj)
 			key = cv2.waitKey(0) & 0xff
 
-	elif frame_no >65:
+	elif frame_no > 65:
 		break
 
 cap.release()

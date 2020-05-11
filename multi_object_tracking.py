@@ -14,9 +14,7 @@ OPENCV_OBJECT_TRACKERS = {
 }
  
 trackers = cv2.MultiTracker_create()
-# fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = False)
 cv2.namedWindow('Frame',cv2.WINDOW_NORMAL)
-cv2.namedWindow('mask',cv2.WINDOW_NORMAL)
 
 kernel = np.ones((23,23),np.uint8)
 tracker_name = "csrt"
@@ -91,7 +89,6 @@ while True:
 
 
 	cv2.imshow("Frame", frame_copy)
-	cv2.imshow('mask',frame)
 	key = cv2.waitKey(1) & 0xFF
 
 	if key == ord("s"):
