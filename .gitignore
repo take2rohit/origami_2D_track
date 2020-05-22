@@ -1,5 +1,4 @@
 /.vscode/
-*.npy
 feature_track.py
 # Videos 
 /videos/*
