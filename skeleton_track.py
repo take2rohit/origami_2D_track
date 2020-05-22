@@ -22,7 +22,7 @@ cv2.namedWindow('Frame',cv2.WINDOW_NORMAL)
 
 # otherwise, grab a reference to the video file
 
-vs = cv2.VideoCapture('videos/tumble_crop.mp4')
+vs = cv2.VideoCapture('clipped_video/omega.mp4')
 _,frame = vs.read()
 mask = np.zeros_like(frame)
 mask_clear = np.zeros_like(frame)
@@ -36,19 +36,7 @@ draw_after = 5
 
 while True:
 	frame_no+=1
-	# grab the current frame, then handle if we are using a
-	# VideoStream or VideoCapture object
 	_,frame = vs.read()
-	frame = cv2.flip(frame, 0)
-	frame = cv2.flip(frame, 1)
-	# check to see if we have reached the end of the stream
-	
-
-	# resize the frame (so we can process it faster)
-
-	# grab the updated bounding box coordinates (if any) for each
-	# object that is being tracked
-	
 	(success, boxes) = trackers.update(frame)
 	if len(boxes) == 3:
 		c+=1
