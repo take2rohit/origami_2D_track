@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 frame_no = 0
-pts = np.load('origami_custom_track.npy')
+pts = np.load('saved_files/origami_roll_spiral_track.npy')
 
 p1 = []
 p2 = []
@@ -13,7 +13,7 @@ for i in range(0, len(pts), 3):
 	p2.append(pts[i+1])
 	p3.append(pts[i+2])
 
-cap = cv2.VideoCapture('videos/tumble_crop.mp4')
+cap = cv2.VideoCapture('/home/rohit/projects/gamitrack/videos/roll.mp4')
 cv2.namedWindow('image',cv2.WINDOW_NORMAL)
 
 
@@ -24,7 +24,7 @@ while 1:
 	frame = cv2.flip(frame, 0)
 	frame = cv2.flip(frame, 1)
 
-	if 63 < frame_no <65 :
+	if 300 < frame_no:
 		
 		for (x1,y1),(x2,y2),(x3,y3) in zip(p1,p2,p3):
 
@@ -59,7 +59,7 @@ while 1:
 			cv2.imshow('image',frame)
 			key = cv2.waitKey(0) & 0xff
 		
-	elif frame_no >65:
+	elif frame_no >300:
 		break
 
 cap.release()
