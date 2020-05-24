@@ -12,7 +12,7 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
 
 ### Running pre-tracked results on saved videos:
 
-- Few videos in `clipped_video` directory have pre tracked results.
+- All videos in `clipped_video` directory have pre tracked results.
 - All manuallly tracked files are available in `saved_files` directory. `.npy` files contains co-ordinates of tracked files.
 - `figure_tracking` directory contains different tracking visualization code for each gait of origami using already saved `.npy` files. To run the file please press spacebar to go to the next frame
 - `figure_tracking/matplotlib_saved_files_plot.py` helps in plotting `.npy` using Matplotlib. Can also be used to convert npy file to some other file type like CSV
@@ -49,5 +49,9 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
     8. Optical Flow
 
 ## Contributer
+<<<<<<< HEAD
 
 - Rohit Lal  [(website)](https://take2rohit.github.io/)
+=======
+- Rohit Lal  [(website)](https://take2rohit.github.io/)
+>>>>>>> 59cc2bd924107ad645c7ee3cecd95df830ab8eef
