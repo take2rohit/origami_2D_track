@@ -45,7 +45,7 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
     4. mil
     5. tld
     6. medianflow
-    7. mosse 
+    7. mosse
     8. Optical Flow
 
 ## Contributer
