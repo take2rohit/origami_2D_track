@@ -49,9 +49,5 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
     8. Optical Flow
 
 ## Contributer
-<<<<<<< HEAD
 
 - Rohit Lal  [(website)](https://take2rohit.github.io/)
-=======
-- Rohit Lal  [(website)](https://take2rohit.github.io/)
->>>>>>> 59cc2bd924107ad645c7ee3cecd95df830ab8eef
