@@ -17,6 +17,25 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
 - `figure_tracking` directory contains different tracking visualization code for each gait of origami using already saved `.npy` files. To run the file please press spacebar to go to the next frame
 - `figure_tracking/matplotlib_saved_files_plot.py` helps in plotting `.npy` using Matplotlib. Can also be used to convert npy file to some other file type like CSV
 
+### How to used saved data
+
+Folder [saved_files](saved_files) contains all CSV files of the tracked results. The results can be found in each dub folder. There are 2 csv files. Lets take example of inchworm motion. There are 2 files named `magnet.csv` and `origami.csv`
+
+1. `magnet.csv`
+
+    - It contains 2 coloum where each coloumn represents points 2D coordnate of *exteme corners of magnet*
+    - The entry in every cell represents `[x,y]` pixel coordinate.
+    - It contains n rows where row number represents the frame/time stamp of coordinate
+    ![image](img/magnet.png)
+
+2. `origami.csv`
+
+      - It contains 3 coloum where each coloumn represents points 2D coordnates of origami shape
+      - `point 1` amd `point 2` are extremes of origami whereas `point 2` is the point in bween origami`
+      - The entry in every cell represents `[x,y]` pixel coordinate.
+      - It contains n rows where row number represents the frame/time stamp of coordinate
+    ![image](img/origami.png)
+
 ### Manual Tracking
 
 - `frame_by_frame_track.py` file helps you to track points in frame by frame. (Modifications required for magnet and origami by chaning number of points to track)
@@ -37,7 +56,7 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
 
 ## Repository info
 
-- This repo has mutliple algorithm to track the origami 
+- This repo has mutliple algorithm to track the origami
 - Algorithms implemented
     1. csrt
     2. kcf
