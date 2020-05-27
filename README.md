@@ -1,4 +1,4 @@
-# Origami 2D Tracking 
+# Origami 2D Tracking
 
 ## Video Demo
 
@@ -10,7 +10,7 @@ Various tracking results can be found [here](https://drive.google.com/drive/u/1/
 
 - Run the following command to install all dependencies `pip3 install -r requirements.txt`
 
-### Running pre-tracked results on saved videos:
+### Running pre-tracked results on saved videos
 
 - All videos in `clipped_video` directory have pre tracked results.
 - All manuallly tracked files are available in `saved_files` directory. `.npy` files contains co-ordinates of tracked files.
@@ -24,7 +24,7 @@ Folder [saved_files](saved_files) contains all CSV files of the tracked results.
 1. `magnet.csv`
 
     - It contains 2 coloum where each coloumn represents points 2D coordnate of *exteme corners of magnet*
-    - The entry in every cell represents `[x,y]` pixel coordinate.
+    - The entry in every cell represents `[x y]` pixel coordinate.
     - It contains n rows where row number represents the frame/time stamp of coordinate
     ![image](img/magnet.png)
 
@@ -32,7 +32,7 @@ Folder [saved_files](saved_files) contains all CSV files of the tracked results.
 
       - It contains 3 coloum where each coloumn represents points 2D coordnates of origami shape
       - `point 1` amd `point 2` are extremes of origami whereas `point 2` is the point in bween origami`
-      - The entry in every cell represents `[x,y]` pixel coordinate.
+      - The entry in every cell represents `[x y]` pixel coordinate.
       - It contains n rows where row number represents the frame/time stamp of coordinate
     ![image](img/origami.png)
 
@@ -42,7 +42,7 @@ Folder [saved_files](saved_files) contains all CSV files of the tracked results.
 
 ### Automatic Tracking
 
-- Fails in high speed motion and 
+- Fails in high speed motion and
 - `multi_object_tracking.py` draw bounding box across 2 points in consecutive frame to start traking and saving into file. It also draws previous points
 - `feature_track.py` automatically find top n features to track and tracks the position of each corners
 - `optical_flow_tracking.py` Use good features to track points automatically using optical flow algorithm. No manual feature selection in required
