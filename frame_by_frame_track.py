@@ -1,47 +1,66 @@
 import numpy as np
 import cv2
-p1 = []
-p2 = []
-p3 = []
+import pandas as pd
 
-global points
-points = []
-cv2.namedWindow('image',cv2.WINDOW_NORMAL)
+def nothing(x):
+    pass
+
+cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 
 def draw_circle(event,x,y,flags,param):
-	global mouseX,mouseY
-	if event == cv2.EVENT_MBUTTONDOWN:
-		cv2.circle(frame,(x,y),4,(255,0,0),-1)
-		mouseX,mouseY = x,y
-		points.append([x,y])
-		print(x,y)
-cv2.setMouseCallback('image',draw_circle)
-cap = cv2.VideoCapture('clipped_video/fortune_teller.mp4')
+	if event == cv2.EVENT_LBUTTONDOWN:
+		c = int(frame_points[frame_no]%points_to_track)
+		keypoints[frame_no,c,0] = x
+		keypoints[frame_no,c,1] = y
+		frame_points[frame_no] += 1
+
+def header(points_to_track, frame_count, frame_skip):
+	head = []
+	index = []
+	for i in range (points_to_track):
+		head.append('x'+ str(i+1))
+		head.append('y'+ str(i+1))
+	for i in range (frame_count):
+		index.append('frame_'+ str(i*frame_skip+1))
+	return head, index
+
+cv2.setMouseCallback('image', draw_circle)
+cap = cv2.VideoCapture('clipped_video/omega.mp4')
 frame_no = 0
-points_to_track = 1
+points_to_track = 5
+fps = 10
+length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+frame_skip = int(cap.get(cv2.CAP_PROP_FPS)/fps)
+frame_count = int(length/frame_skip)
+cv2.createTrackbar('Frame','image',0,frame_count-1,nothing)
+frame_no = 1
+keypoints = np.zeros((frame_count,points_to_track,2))
+frame_points = np.zeros(frame_count)
+
 while 1:
-	try:
-		
+		cv2.setTrackbarPos('Frame', 'image', frame_no)
+		cap.set(cv2.CAP_PROP_POS_FRAMES, frame_no*int(cap.get(cv2.CAP_PROP_FPS)/fps))
 		_,frame = cap.read()
-		key = cv2.waitKey(0) & 0xff
-		frame = cv2.putText(frame, 'frame: '+str(frame_no), (50, 80) 
-		, cv2.FONT_HERSHEY_SIMPLEX , 2, (255,255,255),5)
+		for i in range(points_to_track):
+			cv2.circle(frame,(int(keypoints[frame_no,i,0]),int(keypoints[frame_no,i,1])),4,(255,0,0),-1)
 		
-		frame = cv2.putText(frame, str(len(points)/points_to_track), (50, 150) 
-		, cv2.FONT_HERSHEY_SIMPLEX , 2, (255,255,255),5)
 		cv2.imshow('image',frame)
-		print("frame: ", frame_no) 
+		key = cv2.waitKey(1) & 0xff
+		frame_no = cv2.getTrackbarPos('Frame','image')
 		
-		if key  == ord("q"):
-			# np.save('saved_files/tumbling/origami.npy', np.array(points))
-			# np.save('saved_files/tumbling/magnet.npy', np.array(points))
-			# print('Tracking saved')      
-			# np.save('saved_files/fortuneTeller/fortuneTeller.npy', np.array(points))
-			# print('Tracking saved')  
+		if key == 100:	#press 'd' for next frame
+			frame_no = cv2.getTrackbarPos('Frame','image') + 1
+
+		if key == 97:	#press 'a' for prev frame
+			frame_no = cv2.getTrackbarPos('Frame','image') - 1
+
+		if key == ord("q"):	#press 'q' to save data as a csv file
+			keypoints = np.reshape(keypoints,(frame_count,2*points_to_track))[1:]
+			header, index = header(points_to_track, frame_count-1, frame_skip)
+			df = pd.DataFrame(keypoints, index=index, columns=header)
+			df.to_csv('saved_files/keypoints.csv', index=True, header=True, sep=',')
+			print('Tracking saved')      
 			break
-		frame_no += 1
-	except Exception as e:
-		# np.save('saved_files/tumbling/origami.npy', np.array(points))
-		# np.save('saved_files/fortuneTeller/fortuneTeller.npy', np.array(points))
-		# print('Tracking saved')        
-		break
+		
+
+	
