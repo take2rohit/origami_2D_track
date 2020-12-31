@@ -38,7 +38,14 @@ Folder [saved_files](saved_files) contains all CSV files of the tracked results.
 
 ### Manual Tracking
 
-- `frame_by_frame_track.py` file helps you to track points in frame by frame. (Modifications required for magnet and origami by chaning number of points to track)
+1. `frame_by_frame_track.py` 
+
+- The file helps you to track points in frame by frame. 
+- The keypoints of the origami/magnet can be manually selected using mouse cursor. 
+- Use the slider or 'a' and 'd' keys to parse through the frames. 
+- In the event of wrongly selecting some points, choose the new set of points to rewrite them. 
+- The chosen points can be viewed by using the slider or 'a' and 'd' keys. 
+- The keypoints are saved as a .csv file
 
 ### Automatic Tracking
 
