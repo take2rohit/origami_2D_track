@@ -9,7 +9,7 @@ cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 
 def draw_circle(event,x,y,flags,param):
 	if event == cv2.EVENT_LBUTTONDOWN:
-		c = int(frame_points[frame_no]%points_to_track)
+		c = int(frame_points[frame_no]%5)
 		keypoints[frame_no,c,0] = x
 		keypoints[frame_no,c,1] = y
 		frame_points[frame_no] += 1
@@ -34,7 +34,7 @@ frame_skip = int(cap.get(cv2.CAP_PROP_FPS)/fps)
 frame_count = int(length/frame_skip)
 cv2.createTrackbar('Frame','image',0,frame_count-1,nothing)
 frame_no = 1
-keypoints = np.zeros((frame_count,points_to_track,2))
+keypoints = np.zeros((frame_count+1,points_to_track,2))
 frame_points = np.zeros(frame_count)
 
 while 1:
@@ -55,7 +55,7 @@ while 1:
 			frame_no = cv2.getTrackbarPos('Frame','image') - 1
 
 		if key == ord("q"):	#press 'q' to save data as a csv file
-			keypoints = np.reshape(keypoints,(frame_count,2*points_to_track))[1:]
+			keypoints = np.reshape(keypoints,(frame_count+1,2*points_to_track))[1:-1]
 			header, index = header(points_to_track, frame_count-1, frame_skip)
 			df = pd.DataFrame(keypoints, index=index, columns=header)
 			df.to_csv('saved_files/keypoints.csv', index=True, header=True, sep=',')
